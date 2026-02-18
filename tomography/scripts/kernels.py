@@ -5,13 +5,13 @@ import cupy as cp
 def utils_point(resolution, n_row, n_col):
     util_preamble = string.Template(
         '''
-        __device__ int getIndexLine(float16 x, float16 center)
+        __device__ int getIndexLine(float x, float center)
         {
             int i = round((x - center) / ${resolution});
             return i;
         }
 
-        __device__ int getIndexMap_1d(float16 x, float16 y, float16 cx, float16 cy)
+        __device__ int getIndexMap_1d(float x, float y, float cx, float cy)
         {
             // Return 1D index of a point (x, y) in a layer
             int idx_x = getIndexLine(x, cx) + ${n_row} / 2;
